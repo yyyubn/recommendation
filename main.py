@@ -44,15 +44,14 @@ for key, value in zip(all_documents_dict.keys(), nearest_store):
 
 #거리 차이가 가장 작은 가게 오름차순으로 정렬 후 상위 5개 추출
 sorted_store = sorted(all_documents_dict, key=all_documents_dict.get)
-result_store = sorted_store[:5] #이부분이 이름 추출하는 거
+result_store = sorted_store[:5] #result_store에 가게 이름 5개 담김
 
+#print(result_store)
 
-print(result_store)
-
-# #차례대로 출력
-# for i in range(len(result_store)):
-#     store_info = collection.find_one({"name": result_store[i]})
-#     print(store_info)    
+#차례대로 출력
+for i in range(len(result_store)):
+    store_info = collection.find_one({"name": result_store[i]})
+    print(store_info)    
 
 
 # 연결 닫기
