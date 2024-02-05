@@ -6,12 +6,34 @@ import boto3
 import os
 from dotenv import load_dotenv
 from flask import Flask, request
+from utils.t_print import print_test
+import json
 
 load_dotenv()
-aws_access_key_id = os.environ.get('aws_access_key_id')
-aws_secret_access_key = os.environ.get('aws_secret_access_key')
+#aws_access_key_id = os.environ.get('aws_access_key_id')
+#aws_secret_access_key = os.environ.get('aws_secret_access_key')
 
 
+def get_secret(secret_name, region_name='ap-northeast-2'):
+    client = boto3.client('secretsmanager', region_name=region_name)
+    response = client.get_secret_value(SecretId=secret_name)
+    secret_value = response['SecretString']
+    return json.loads(secret_value)
+    # try:
+    #     response = client.get_secret_value(SecretId=secret_name)
+    #     secret_value = response['SecretString']
+    #     return json.loads(secret_value)
+    # except Exception as e:
+    #     print(f"Secret 값을 가져오는 중 에러 발생: {e}")
+    #     return None
+secret_value = get_secret(secret_name='secret/aws')
+
+if secret_value:
+    # "a" 필드의 값 가져오기
+    aws_access_key_id = secret_value.get("aws.accessKey")
+    aws_secret_access_key = secret_value.get("aws.secretKey")
+    
+    #print("Value of 'a':", a_value)
 
 app = Flask(__name__)
 
@@ -89,12 +111,18 @@ def recommendation222():
     
     #Content_Length=request.headers.get('Content-Length')
     
-    latitude=request.headers.get('La')
-    longitude=request.headers.get('Lo')
-    target_language=request.headers.get('Language')
+    # latitude=request.headers.get('La')
+    # longitude=request.headers.get('Lo')
+    # target_language=request.headers.get('Language')
     
-    location=[latitude, longitude]
+    # location=[latitude, longitude]
 
+
+    target_language='en'
+    
+    location=[13.0, 12.0]
+
+    
 
     for item in items:
         data = {
@@ -151,7 +179,7 @@ def recommendation222():
 
 
     
-    
+    print_test()
     return last
 
 if __name__ == '__main__':
