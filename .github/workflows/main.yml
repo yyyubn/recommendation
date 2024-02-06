@@ -6,8 +6,6 @@ on:
     paths-ignore:
     - '.gitignore'
     - '.dockerignore'
-    - '.README.md
-
 jobs:
   Continuous_Integration:   #job 이름
     runs-on: ubuntu-latest  #job을 실행할 환경
