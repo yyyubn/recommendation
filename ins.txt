@@ -9,9 +9,12 @@ geocoder==1.38.1
 geographiclib==2.0
 geopy==2.4.1
 idna==3.6
-numpy==1.26.3
+numpy==1.24.4
 pymongo==4.6.1
 ratelim==0.1.6
-requests==2.31.0
 six==1.16.0
-urllib3==2.1.0
+urllib3==2.0.7
+boto3==1.34.29
+botocore==1.34.29
+Flask-Cors==4.0.0
+flask==3.0.1
